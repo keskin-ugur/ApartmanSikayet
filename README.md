@@ -60,7 +60,7 @@ Sistem ilk kez çalıştırıldığında veritabanını (`apartman.db`) otomatik
 
 | Giriş Ekranı | Admin Paneli |
 |:---:|:---:|
-| ![Login Screen](screenshots/login.png) | ![User Dashboard](screenshots/dashboard.png) | ![Admin Dashboard](screenshots/admin.png) |
+| ![Login Screen](screenshots/login.png) | ![Admin Dashboard](screenshots/admin.png) |
 
 *(Not: Ekran görüntüleri klasörü proje içerisindedir)*
 
