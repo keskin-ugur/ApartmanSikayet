@@ -4,7 +4,6 @@
 ![Flask](https://img.shields.io/badge/Flask-2.x-lightgrey?style=for-the-badge&logo=flask)
 ![SQLite](https://img.shields.io/badge/SQLite-Database-blue?style=for-the-badge&logo=sqlite)
 [![Yayında](https://img.shields.io/badge/Website-Yayında_🚀-2ea44f?style=for-the-badge&logo=google-chrome&logoColor=white)](http://keskinugur.pythonanywhere.com)
-![Status](https://img.shields.io/badge/Status-Completed-success?style=for-the-badge)
 
 ## 🌍 Uygulamaya Git (Live App)
 
