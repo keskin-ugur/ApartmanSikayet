@@ -1,11 +1,21 @@
-# 🏢 Apartman Yönetim Sistemi (Apartment Management System)
+# 🏢 Apartman Şikayet Yönetim Sistemi
 
 ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python)
 ![Flask](https://img.shields.io/badge/Flask-2.x-lightgrey?style=for-the-badge&logo=flask)
 ![SQLite](https://img.shields.io/badge/SQLite-Database-blue?style=for-the-badge&logo=sqlite)
-![Status](https://img.shields.io/badge/Status-Prototype-orange?style=for-the-badge)
+[![Yayında](https://img.shields.io/badge/Website-Yayında_🚀-2ea44f?style=for-the-badge&logo=google-chrome&logoColor=white)](http://keskinugur.pythonanywhere.com)
+![Status](https://img.shields.io/badge/Status-Completed-success?style=for-the-badge)
+
+## 🌍 Uygulamaya Git (Live App)
+
+Projeye aşağıdaki linkten direkt erişebilirsiniz:
+👉 **[http://keskinugur.pythonanywhere.com](http://keskinugur.pythonanywhere.com)**
+
+*(Not: Ücretsiz sunucu kullanıldığı için ilk açılışta yüklenmesi birkaç saniye sürebilir.)*
 
 Yönetim Bilişim Sistemleri (MIS) **Sistem Analizi ve Tasarımı** dersi kapsamında geliştirilmiş, apartman/site sakinlerinin şikayetlerini iletebildiği ve yöneticinin bu talepleri takip edebildiği web tabanlı yönetim sistemidir.
+
+---
 
 ## 🎯 Özellikler
 
@@ -28,8 +38,8 @@ Projeyi yerel makinenizde çalıştırmak için adımları takip edin:
 
 1.  **Projeyi Klonlayın:**
     ```bash
-    git clone [https://github.com/keskin-ugur/apartman-yonetim-sistemi.git](https://github.com/keskin-ugur/apartman-yonetim-sistemi.git)
-    cd apartman-yonetim-sistemi
+    git clone [https://github.com/keskin-ugur/ApartmanSikayet.git](https://github.com/keskin-ugur/ApartmanSikayet.git)
+    cd ApartmanSikayet
     ```
 
 2.  **Gerekli Kütüphaneleri Yükleyin:**
