@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apartman Yönetim Sistemi</title>
+    <style>
+        /* SIFIRLAMA ve TEMEL AYARLAR */
+        * { box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: #121212; /* Koyu Arka Plan */
+            color: #e0e0e0; /* Açık Yazı */
+            margin: 0; padding: 20px; 
+        }
+
+        .container { 
+            max-width: 900px; 
+            margin: 0 auto; 
+            background-color: #1e1e1e; /* Koyu Gri Kutu */
+            padding: 25px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5); 
+        }
+
+        /* HEADER */
+        .header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 1px solid #333; 
+            padding-bottom: 15px; 
+            margin-bottom: 25px; 
+        }
+        .header h3 { margin: 0; color: #ffffff; }
+        
+        .user-info { display: flex; align-items: center; gap: 15px; }
+        .badge { 
+            background: #333; 
+            color: #ffc107; 
+            padding: 4px 8px; 
+            border-radius: 4px; 
+            font-size: 0.85em; 
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .logout-btn { 
+            background-color: #cf2f2f; 
+            color: white; 
+            text-decoration: none; 
+            padding: 8px 15px; 
+            border-radius: 5px; 
+            font-weight: bold; 
+            font-size: 0.9em;
+            transition: 0.2s;
+        }
+        .logout-btn:hover { background-color: #b02121; }
+
+        /* FORMLAR */
+        .form-box { 
+            background-color: #2c2c2c; 
+            padding: 20px; 
+            border-radius: 8px; 
+            margin-bottom: 30px; 
+            border: 1px solid #444; 
+        }
+        
+        /* Admin Paneli Özel Rengi */
+        .admin-box { 
+            border: 1px solid #ffc107; 
+            background-color: #2a2510; /* Hafif Sarımsı Koyu */
+        }
+        .admin-box h4 { color: #ffc107; border-bottom: 1px solid #554400; padding-bottom: 10px; }
+
+        label { display: block; margin-bottom: 8px; font-weight: 500; color: #ccc; }
+        
+        input[type="text"], input[type="password"], textarea { 
+            width: 100%; 
+            padding: 12px; 
+            margin-bottom: 15px; 
+            background-color: #383838; 
+            border: 1px solid #555; 
+            color: white; 
+            border-radius: 4px; 
+        }
+        input:focus, textarea:focus { outline: none; border-color: #007bff; }
+
+        button { 
+            cursor: pointer; 
+            padding: 12px 20px; 
+            border: none; 
+            border-radius: 5px; 
+            font-size: 1rem; 
+            font-weight: bold; 
+        }
+        .btn-primary { background-color: #007bff; color: white; width: 100%; }
+        .btn-warning { background-color: #ffc107; color: #222; }
+
+        /* LİSTELEME */
+        .section-title { 
+            border-bottom: 2px solid #007bff; 
+            padding-bottom: 10px; 
+            margin-bottom: 20px; 
+            color: #fff;
+        }
+
+        .complaint-card { 
+            background-color: #252525; 
+            border: 1px solid #333; 
+            border-left: 5px solid #007bff; 
+            padding: 15px; 
+            margin-bottom: 15px; 
+            border-radius: 6px; 
+        }
+        .meta { 
+            display: flex; 
+            justify-content: space-between; 
+            font-size: 0.9em; 
+            color: #888; 
+            margin-bottom: 10px; 
+            padding-bottom: 5px; 
+            border-bottom: 1px solid #333; 
+        }
+        .status { color: #28a745; font-weight: bold; }
+        
+        .alert { padding: 10px; margin-bottom: 20px; border-radius: 5px; font-weight: bold; }
+        .error { background: #5c1818; color: #ffcccc; border: 1px solid #8a2be2; }
+        .success { background: #154626; color: #d4edda; border: 1px solid #1e7e34; }
+
+/* FOOTER / İMZA ALANI */
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #333; /* İnce bir çizgi ile ayırır */
+            text-align: center;
+            font-size: 0.9em;
+            color: #666;
+        }
+        
+        .footer a {
+            color: #888;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .footer a:hover {
+            color: #007bff; 
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <div class="header">
+        <h3>Apartman Yönetim Paneli</h3>
+        <div class="user-info">
+            <span>👤 {{ session['user_name'] }}</span>
+            <span class="badge">{{ role }}</span>
+            <a href="/cikis" class="logout-btn">Çıkış</a>
+        </div>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert {{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    {% if role == 'admin' %}
+    <div class="form-box admin-box">
+        <h4>🔐 Yönetici Şifre İşlemleri</h4>
+        <p style="font-size: 0.9rem; color: #aaa;">Buradan yönetici giriş şifresini (telefon numarasını) güncelleyebilirsiniz.</p>
+        
+        <form action="/sifre-degistir" method="POST" style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 200px;">
+                <input type="password" name="old_password" placeholder="Mevcut Şifre (Eski Tel No)" required style="margin:0;">
+            </div>
+            <div style="flex: 1; min-width: 200px;">
+                <input type="password" name="new_password" placeholder="Yeni Şifre (Yeni Tel No)" required style="margin:0;">
+            </div>
+            <button type="submit" class="btn-warning">Güncelle</button>
+        </form>
+    </div>
+    {% endif %}
+
+    {% if role != 'admin' %}
+    <div class="form-box">
+        <h4 style="margin-top:0; color: #007bff;">📝 Yeni Şikayet Oluştur</h4>
+        <form method="POST" action="/sikayet-ekle">
+            <label>Konu</label>
+            <input type="text" name="title" placeholder="Örn: Asansör Arızası" required>
+            
+            <label>Açıklama</label>
+            <textarea name="description" rows="4" placeholder="Detayları buraya yazınız..." required></textarea>
+            
+            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                <input type="checkbox" name="is_anonymous" value="1" id="anon" style="width: auto; margin: 0 10px 0 0;">
+                <label for="anon" style="margin: 0; cursor: pointer;">İsmimi Gizle (Anonim)</label>
+            </div>
+            
+            <button type="submit" class="btn-primary">Talebi Gönder</button>
+        </form>
+    </div>
+    {% endif %}
+
+    <h3 class="section-title">📋 Kayıtlar</h3>
+    
+    {% for sikayet in sikayetler %}
+    <div class="complaint-card" style="border-left: 5px solid {% if sikayet['status'] == 'Çözüldü' %}#28a745{% else %}#ffc107{% endif %};">
+        
+        <div class="meta" style="align-items: flex-start;">
+            <div style="display: flex; flex-direction: column; gap: 5px;">
+                {% if role == 'admin' %}
+                    {% if sikayet['is_anonymous'] == 1 %}
+                         <div>🕵️ <span style="color:#ffc107; font-weight: bold;">Gizli Üye</span></div>
+                    {% else %}
+                        <div style="color: #fff; font-weight: bold; font-size: 1.1em;">
+                            👤 {{ sikayet['full_name'] }}
+                        </div>
+                        <div style="color: #aaa; font-size: 0.9em;">
+                            📞 {{ sikayet['phone_number'] }}
+                        </div>
+                    {% endif %}
+                {% else %}
+                    📅 {{ sikayet['created_at'] }}
+                {% endif %}
+            </div>
+            
+            <span style="font-weight: bold; white-space: nowrap; color: {% if sikayet['status'] == 'Çözüldü' %}#28a745{% else %}#ffc107{% endif %};">
+                ● {{ sikayet['status'] }}
+            </span> 
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid #444; margin: 10px 0;">
+
+        <h4 style="margin: 0 0 5px 0; color: #fff;">{{ sikayet['title'] }}</h4>
+        <p style="margin: 0 0 15px 0; color: #ccc; line-height: 1.4;">{{ sikayet['description'] }}</p>
+
+        {% if role == 'admin' and sikayet['status'] != 'Çözüldü' %}
+        <form action="/cozuldu-isaretle/{{ sikayet['id'] }}" method="POST" style="margin: 0;">
+            <button type="submit" style="background-color: #28a745; color: white; padding: 8px 15px; font-size: 0.9em; width: auto; display: inline-flex; align-items: center; gap: 5px; cursor: pointer; border: none; border-radius: 4px;">
+                ✅ Çözüldü Olarak İşaretle
+            </button>
+        </form>
+        {% endif %}
+    </div>
+    {% else %}
+        <div style="text-align: center; padding: 40px; color: #666; border: 2px dashed #333; border-radius: 8px;">
+            <p>Henüz kayıtlı bir şikayet bulunmuyor.</p>
+        </div>
+    {% endfor %}
+
+    <div class="footer">
+        Developed with 💻 & ☕ by 
+        <a href="https://github.com/keskin-ugur" target="_blank">
+            Uğur KESKİN
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>

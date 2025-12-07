@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Giriş Yap</title>
+    </head>
+<body>
+    <div style="max-width: 400px; margin: 50px auto; padding: 20px; border: 1px solid #ccc;">
+        <h2>Apartman Girişi</h2>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div style="color: red; margin-bottom: 10px;">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            <label>İsim Soyisim (Yönetici için 'admin'):</label><br>
+            <input type="text" name="fullname" required style="width: 100%; padding: 8px;"><br><br>
+            
+            <label>Telefon Numarası (Yönetici için Şifre):</label><br>
+            <input type="text" name="phone" required style="width: 100%; padding: 8px;"><br><br>
+            
+            <button type="submit" style="width: 100%; padding: 10px; background: #007bff; color: white; border: none;">Giriş Yap</button>
+        </form>
+    </div>
+</body>
+</html>
